@@ -1,5 +1,5 @@
 # Wiki Extensions plugin for Redmine
-# Copyright (C) 2009-2011  Haruyuki Iida
+# Copyright (C) 2012  Haruyuki Iida
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -14,18 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-class WikiExtensionsTagRelation < ActiveRecord::Base
-  unloadable
-  belongs_to :wiki_page
-  belongs_to :tag, :class_name => 'WikiExtensionsTag', :foreign_key => :tag_id
-  validates_presence_of :wiki_page_id, :tag_id
-  validates_uniqueness_of :tag_id, :scope => :wiki_page_id
 
-  def destroy
-    target_tag_id = tag_id
-    super
-    target_tag = WikiExtensionsTag.find(tag_id) if tag_id
-    target_tag.destroy if target_tag.page_count == 0
-  end
-
+ActionController::Routing::Routes.draw do |map|
+  map.connect 'projects/:id/wiki_extensions/:action', :controller => 'wiki_extensions'
+  map.connect 'projects/:id/wiki_extensions_settings/:action', :controller => 'wiki_extensions_settings'
 end

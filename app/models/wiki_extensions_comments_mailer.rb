@@ -1,7 +1,6 @@
 require 'mailer'
 
 class WikiExtensionsCommentsMailer < Mailer
-
   def wiki_commented(comment, wiki_page)
     project = wiki_page.project
     author = comment.user
