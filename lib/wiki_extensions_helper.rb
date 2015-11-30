@@ -1,13 +1,6 @@
 #Author: Dmitry Manayev
 
-require 'redmine'
 module WikiExtensionsHelper
-  #This needed to define WikiExtensionsHelper for WikiExtensionsController.
-end
-module ActionView  
-  module Helpers
-    module WikiExtensionsHelper  
-     
      
       ## Method for displaying tree of comments\n
       #comments_tree - is orderly array of comments;
@@ -137,6 +130,5 @@ module ActionView
         ret << "</ul>"
         return ret
       end
-    end
-  end
+
 end

@@ -15,22 +15,14 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require_dependency "redmine/wiki_formatting/textile/helper"
-
 module WikiExtensionsHelperPatch
   def self.included(base) # :nodoc:
-    base.send(:include, HelperMethodsWikiExtensions)
-    
-    
     base.class_eval do
       unloadable # Send unloadable so it will not be unloaded in development    
       alias_method_chain :heads_for_wiki_formatter, :wiki_smiles    
     end
   end
-  
-end
 
-module HelperMethodsWikiExtensions
   def heads_for_wiki_formatter_with_wiki_smiles
     heads_for_wiki_formatter_without_wiki_smiles
     return if ie6_or_ie7?

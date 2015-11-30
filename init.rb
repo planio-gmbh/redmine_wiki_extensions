@@ -14,20 +14,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-require 'redmine'
 require 'redmine/wiki_formatting/textile/redcloth3'
 
-require_dependency 'wiki_extensions_notifiable_patch'
-Dir::foreach(File.join(File.dirname(__FILE__), 'lib')) do |file|
-  next unless /\.rb$/ =~ file
-  require file
-end
-ActionView::Base.class_eval do
-  include ActionView::Helpers::WikiExtensionsHelper
-end
+require_dependency 'wiki_extensions_application_hooks'
+require_dependency 'wiki_extensions_issue_hooks'
+require_dependency 'emoticons'
 
 Rails.configuration.to_prepare do
-  require_dependency 'projects_helper'
+
   # Guards against including the module multiple time (like in tests)
   # and registering multiple callbacks
   unless ProjectsHelper.included_modules.include? WikiExtensionsProjectsHelperPatch
@@ -53,6 +47,8 @@ Rails.configuration.to_prepare do
   unless WikiPage.included_modules.include? WikiExtensionsWikiPagePatch
     WikiPage.send(:include, WikiExtensionsWikiPagePatch)
   end
+
+  RedmineWikiExtensions.load_macros
 end
 
 Redmine::Plugin.register :redmine_wiki_extensions do

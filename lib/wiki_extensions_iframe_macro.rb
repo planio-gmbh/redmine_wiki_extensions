@@ -15,11 +15,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module WikiExtensionsWikiMacro
+module WikiExtensionsIframeMacro
   Redmine::WikiFormatting::Macros.register do
     desc "Insert an iframe tag" + "\n\n" +
       "  !{{iframe(url, width, height)}}" + "\n\n"
-    "  !{{iframe(url,  width, height, scroll)}}"
+      "  !{{iframe(url,  width, height, scroll)}}"
     macro :iframe do |obj, args|
       width = '100%'
       width = args[1].strip if args[1]
