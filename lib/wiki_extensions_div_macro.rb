@@ -21,10 +21,15 @@ module WikiExtensionsDivMacro
       " !{{div_start_tag(id_name)}}" + "'\n" +
       " !{{div_start_tag(id_name, class_name)}}"
     macro :div_start_tag do |obj, args|
-      o = '<div>' if args.length == 0
-      o = '<div id="' + args[0].strip + '">' if args.length == 1
-      o = '<div id="' + args[0].strip + '" class="' + args[1].strip + '">' if args.length == 2
-      o.html_safe
+      args = args.map{|s| ERB::Util::h s.to_s.strip.gsub('"', '')}
+      case args.length
+      when 0
+        '<div>'
+      when 1
+        '<div id="' + args[0] + '">'
+      when 2
+        '<div id="' + args[0] + '" class="' + args[1] + '">'
+      end.html_safe
     end
   end
 
