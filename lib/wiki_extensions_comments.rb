@@ -25,7 +25,7 @@ module WikiExtensionsComments
       unless User.current.allowed_to?({:controller => 'wiki_extensions', :action => 'add_comment'}, @project)
         return ''
       end
-      page = obj.page if obj
+      return unless obj && obj.respond_to?(:page) && page = obj.page
 
       num = rand(10000)
       area_id = "add_comment_area_#{num}"
@@ -43,8 +43,7 @@ module WikiExtensionsComments
       unless User.current.allowed_to?({:controller => 'wiki_extensions', :action => 'show_comments'}, @project)
         return ''
       end
-      page = obj.page
-      return unless page
+      return unless obj && obj.respond_to?(:page) && page = obj.page
 
       data = page.wiki_extension_data
       comments = WikiExtensionsComment.where(:wiki_page_id => page.id).all
