@@ -14,11 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-require 'redmine'
-require 'application_helper'
 class WikiExtensionsApplicationHooks < Redmine::Hook::ViewListener
-  include ApplicationHelper
-
   render_on :view_layouts_base_html_head, :partial => 'wiki_extensions/html_header'
   render_on :view_layouts_base_body_bottom, :partial => 'wiki_extensions/body_bottom'
     

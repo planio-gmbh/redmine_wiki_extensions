@@ -14,33 +14,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-require_dependency 'wiki_page'
 
 module WikiExtensionsWikiPagePatch
   def self.included(base) # :nodoc:
-    base.extend(ClassMethodsForWikiExtension)
-
-    base.send(:include, InstanceMethodsForWikiExtension)
-
     base.class_eval do
       unloadable # Send unloadable so it will not be unloaded in development
       has_many :wiki_extensions_tag_relations, :dependent => :destroy
       has_many :wiki_ext_tags, :class_name => 'WikiExtensionsTag', :through => :wiki_extensions_tag_relations, :source => :tag
       has_one :wiki_extensions_count, :foreign_key => :page_id, :dependent => :destroy
-      class << self
-        # I dislike alias method chain, it's not the most readable backtraces
-        
-      end
-      
     end
-
   end
-end
-module ClassMethodsForWikiExtension
-  
-end
 
-module InstanceMethodsForWikiExtension
   def wiki_extension_data
     @wiki_extension_data ||= {}
   end  
