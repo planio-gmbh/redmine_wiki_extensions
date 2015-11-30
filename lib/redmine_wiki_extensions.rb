@@ -4,7 +4,7 @@ module RedmineWikiExtensions
     WikiExtensionsCountMacro
     WikiExtensionsDivMacro
     WikiExtensionsFootnote
-    WikiExtensionsIframeMacro
+    # WikiExtensionsIframeMacro
     WikiExtensionsLastupdatedAtMacro
     WikiExtensionsLastupdatedByMacro
     WikiExtensionsNewMacro
