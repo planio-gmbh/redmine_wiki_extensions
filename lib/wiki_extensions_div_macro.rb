@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module WikiExtensionsWikiMacro
+module WikiExtensionsDivMacro
   Redmine::WikiFormatting::Macros.register do
     desc "Displays a <pre><div id=" + '"id_name"' + " class=" + '"' + 'class_name' + '"></pre>' + "\n\n" +
       " !{{div_start_tag(id_name)}}" + "'\n" +
@@ -27,9 +27,7 @@ module WikiExtensionsWikiMacro
       o.html_safe
     end
   end
-end
 
-module WikiExtensionsWikiMacro
   Redmine::WikiFormatting::Macros.register do
     desc "Displays a <pre></div></pre>\n\n" +
       "  !{{div_end_tag}}"

@@ -15,33 +15,24 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require_dependency 'projects_helper'
-
 module WikiExtensionsProjectsHelperPatch
-  def self.included(base) # :nodoc:
-    base.send(:include, ProjectsHelperMethodsWikiExtensions)
-
+  def self.included(base)
     base.class_eval do
-      unloadable # Send unloadable so it will not be unloaded in development
-
       alias_method_chain :project_settings_tabs, :wiki_extensions
     end
-
   end
-end
 
-module ProjectsHelperMethodsWikiExtensions
   def project_settings_tabs_with_wiki_extensions
-    tabs = project_settings_tabs_without_wiki_extensions
-    action = {:name => 'wiki_extensions', 
-      :controller => 'wiki_extensions_settings', 
-      :action => :show, 
-      :partial => 'wiki_extensions_settings/show', 
-      :label => :wiki_extensions}
-
-    tabs << action if User.current.allowed_to?(action, @project)
-
-    tabs
+    project_settings_tabs_without_wiki_extensions.tap do |tabs|
+      if User.current.allowed_to?(:wiki_extensions_settings, @project)
+        tabs.push({
+          :name => 'wiki_extensions',
+          :partial => 'wiki_extensions_settings/show',
+          :action => :wiki_extensions_settings,
+          :label => :wiki_extensions
+        })
+      end
+    end
   end
 end
 
