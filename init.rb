@@ -32,9 +32,10 @@ Rails.configuration.to_prepare do
     Redmine::WikiFormatting::Textile::Formatter.send(:include, WikiExtensionsFormatterPatch)
   end
 
-  unless Redmine::WikiFormatting::Textile::Helper.included_modules.include? WikiExtensionsHelperPatch
-    Redmine::WikiFormatting::Textile::Helper.send(:include, WikiExtensionsHelperPatch)
-  end
+  # remove broken smiley icon
+  # unless Redmine::WikiFormatting::Textile::Helper.included_modules.include? WikiExtensionsHelperPatch
+  #   Redmine::WikiFormatting::Textile::Helper.send(:include, WikiExtensionsHelperPatch)
+  # end
 
   unless Redmine::Notifiable.included_modules.include? WikiExtensionsNotifiablePatch
     Redmine::Notifiable.send(:include, WikiExtensionsNotifiablePatch)
