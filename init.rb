@@ -17,6 +17,7 @@
 require 'redcloth3'
 
 require_dependency 'wiki_extensions_application_hooks'
+require_dependency 'wiki_extensions_controller_hooks'
 require_dependency 'wiki_extensions_issue_hooks'
 require_dependency 'emoticons'
 
