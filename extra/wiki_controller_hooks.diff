@@ -1,0 +1,14 @@
+diff --git a/app/controllers/wiki_controller.rb b/app/controllers/wiki_controller.rb
+index 119fae0..4d7c2db 100644
+--- a/app/controllers/wiki_controller.rb
++++ b/app/controllers/wiki_controller.rb
+@@ -83,6 +83,9 @@ class WikiController < ApplicationController
+       end
+       return
+     end
++
++    call_hook :controller_wiki_show_before_render, content: @content, format: params[:format]
++
+     if User.current.allowed_to?(:export_wiki_pages, @project)
+       if params[:format] == 'pdf'
+         send_data(wiki_page_to_pdf(@page, @project), :type => 'application/pdf', :filename => "#{@page.title}.pdf")
