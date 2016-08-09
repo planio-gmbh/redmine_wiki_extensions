@@ -93,6 +93,7 @@ module WikiExtensionsWikiControllerPatch
     text << "\n\n"
     text << footer.content.text
     text << "\n\n</div>"
+    @content.text = text
 
   end
 end
