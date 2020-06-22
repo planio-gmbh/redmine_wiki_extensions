@@ -37,10 +37,8 @@ Rails.configuration.to_prepare do
   # unless Redmine::WikiFormatting::Textile::Helper.included_modules.include? WikiExtensionsHelperPatch
   #   Redmine::WikiFormatting::Textile::Helper.send(:include, WikiExtensionsHelperPatch)
   # end
-  
-  unless Redmine::Notifiable.included_modules.include? WikiExtensionsNotifiablePatch
-    Redmine::Notifiable.send(:include, WikiExtensionsNotifiablePatch)
-  end
+
+  WikiExtensionsNotifiablePatch.apply
   
   unless WikiController.included_modules.include? WikiExtensionsWikiControllerPatch
     WikiController.send(:include, WikiExtensionsWikiControllerPatch)
