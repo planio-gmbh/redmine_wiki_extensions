@@ -15,10 +15,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 require 'redmine'
-begin
-  require 'config/initializers/session_store.rb'
-rescue LoadError
-end
 require 'redmine/wiki_formatting/textile/redcloth3'
 
 $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/lib"
